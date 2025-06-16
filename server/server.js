@@ -8,6 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get("/", (req, res) => {
+  res.send("✅ Active Status: Working Good");
+});
+
 const uploadRoute = require("./routes/upload");
 app.use("/api", uploadRoute);
 
