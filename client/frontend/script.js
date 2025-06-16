@@ -8,6 +8,7 @@ function getGradeColor(grade) {
     default: return "black";
   }
 }
+const baseURL = "https://parinaam.onrender.com";
 
 async function searchResult() {
   const roll = document.getElementById('rollInput').value.trim();
@@ -47,7 +48,7 @@ async function searchResult() {
   ];
 
   try {
-    const res = await fetch(`http://localhost:5000/api/student/${roll}`);
+    const res = await fetch(`${baseURL}/api/student/${roll}`);
     const data = await res.json();
 
     if (data.error) {
