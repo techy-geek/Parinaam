@@ -18,9 +18,10 @@ node_modules/
 client/build/
 client/dist/
 
+
 # === BACKEND BUILD OR DEPLOY FILES ===
-server/uploads/
-server/dist/
+server/uploads/*
+!server/uploads/.gitkeep
 server/build/
 
 # === OS & EDITOR-SPECIFIC ===
