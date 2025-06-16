@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parinaam - NIT Silchar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="header">
+    <img src="logo.png" alt="College Logo" class="logo" />
+    <div class="header-text">
+      <h1>PARINAAM - NATIONAL INSTITUTE OF TECHNOLOGY, SILCHAR</h1>
+      <p> Examination Branch | Result Portal 2025</p>
+      <p><b> Illustrative purposes only</b> </p>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Second Sem Result-2028 Batch</h2>
+    <form onsubmit="event.preventDefault(); searchResult();">
+      <label for="rollInput">Scholar ID:</label>
+      <input type="text" id="rollInput" placeholder="Enter your Scholar ID" required />
+      <button type="submit">LOGIN</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

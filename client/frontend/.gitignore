@@ -1,0 +1,58 @@
+# === GLOBAL IGNORE RULES ===
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+
+# === NODE MODULES ===
+node_modules/
+**/node_modules/
+
+# === ENVIRONMENT SECRETS ===
+.env
+.env.local
+.env.*.local
+
+# === FRONTEND BUILD OUTPUT (in case of React or bundlers) ===
+client/build/
+client/dist/
+
+# === BACKEND BUILD OR DEPLOY FILES ===
+server/uploads/
+server/dist/
+server/build/
+
+# === OS & EDITOR-SPECIFIC ===
+.vscode/
+.idea/
+*.code-workspace
+
+# === FRONTEND STATIC ONLY ===
+client/*.zip
+client/*.tar.gz
+
+# === PDF and result input/output ===
+**/*.pdf
+**/*.csv
+
+# === MongoDB dump files (if any) ===
+*.dump
+*.bak
+dump/
+
+# === Logs ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# === Coverage or Testing Output ===
+coverage/
+*.lcov
+
+# === Optional lockfiles ===
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
