@@ -17,11 +17,7 @@ pdf(buffer).then((data) => {
 
   for (let line of lines) {
     line = line.trim();
-
-    // Skip header or blank line
     if (!line || line.toLowerCase().includes("reg")) continue;
-
-    // Find regNo embedded in the line
     const regMatch = line.match(/(2\d{6})/);
     if (regMatch) {
       const regNo = regMatch[1];

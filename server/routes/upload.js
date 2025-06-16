@@ -7,14 +7,12 @@ const Student = require("../models/Student");
 
 const router = express.Router();
 
-// Multer storage setup
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
 const upload = multer({ storage });
 
-// Helper: Find name from regNo
 const findName = (regNo) => {
   const match = names.find((n) => n.regNo === regNo);
   return match ? match.name : "Unknown";
@@ -32,7 +30,6 @@ const getBranch = (regNo) => {
   }
 };
 
-// Upload Route
 router.post("/upload", upload.single("pdf"), async (req, res) => {
   try {
     if (!req.file) {
@@ -48,7 +45,7 @@ router.post("/upload", upload.single("pdf"), async (req, res) => {
       const parts = line.split(/\s+/);
       const slno = parts[0];
       const regNo = parts[1];
-      const name = findName(regNo); // ✅ attach name here
+      const name = findName(regNo);
       const branch = getBranch(regNo);
 
 
@@ -65,7 +62,6 @@ router.post("/upload", upload.single("pdf"), async (req, res) => {
       return { slno, regNo, name,branch, subjects, gp, sgpa, cgpa, eaa };
     });
 
-    // Optional: Clear old records before inserting (use if re-uploading)
     await Student.deleteMany({});
 
     await Student.insertMany(students);

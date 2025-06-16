@@ -20,9 +20,7 @@ async function searchResult() {
   }
 
   resultDiv.innerHTML = "<p>Loading...</p>";
-  
 
-  // Define subject lists before anything else
   const subjectsA = [
     "CE 102 - Environmental Science & Engg.",
     "CH 101 – Chemistry",
@@ -54,7 +52,6 @@ async function searchResult() {
     if (data.error) {
       resultDiv.innerHTML = `<p style="color: red;">${data.error}</p>`;
     } else {
-      // 🔍 Determine subject group from roll number
       const groupAStart = ["2411", "2415", "2416"];
       const rollPrefix = data.regNo.slice(0, 4);
       const subjectNames = groupAStart.includes(rollPrefix) ? subjectsA : subjectsB;
@@ -77,9 +74,7 @@ async function searchResult() {
     ${subjectsHTML}
   </div>
 `;
-
     }
-
   } catch (err) {
     resultDiv.innerHTML = `<p style="color: red;">Failed to fetch result. Server may be down.</p>`;
     console.error(err);
