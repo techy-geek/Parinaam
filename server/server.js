@@ -11,6 +11,9 @@ app.get("/", (req, res) => {
   res.send("✅ Active Status: Working Good");
 });
 
+const adminRoutes = require("./routes/adminRouter");
+app.use("/admin", adminRoutes);
+
 const uploadRoute = require("./routes/upload");
 app.use("/api", uploadRoute);
 
@@ -32,3 +35,4 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => {
     console.error("MongoDB connection failed ❌", err);
   });
+

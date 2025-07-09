@@ -1,10 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const Student = require("../models/Student");
+const fs = require("fs");
+const path = require("path");
+const logFilePath = path.join(process.cwd(), "user-logs.txt"); // ✅ always points to root
 
 router.get("/:regNo", async (req, res) => {
+  const regNo = req.params.regNo.trim();
+  console.log("📩 API called for roll:", regNo);
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  const timestamp = new Date().toISOString();
+  const logLine = `${timestamp} | IP: ${ip} | Roll: ${regNo}\n`;
+
+  fs.appendFile(logFilePath, logLine, (err) => {
+    if (err) console.error("Log write failed:", err);
+  });
+
   try {
-    const student = await Student.findOne({ regNo: req.params.regNo });
+    const student = await Student.findOne({ regNo });
 
     if (!student) {
       return res.status(404).json({ error: "Student not found" });
@@ -14,44 +27,6 @@ router.get("/:regNo", async (req, res) => {
   } catch (err) {
     console.error("Search failed:", err);
     res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-router.get("/analytics/basic", async (req, res) => {
-  try {
-    const students = await Student.find();
-
-    if (!students.length) {
-      return res.status(404).json({ error: "No student data found" });
-    }
-
-    const totalStudents = students.length;
-
-    const avgSgpa =
-      students.reduce((acc, curr) => acc + parseFloat(curr.sgpa || 0), 0) /
-      totalStudents;
-
-    const avgCgpa =
-      students.reduce((acc, curr) => acc + parseFloat(curr.cgpa || 0), 0) /
-      totalStudents;
-    const topper = students.reduce((max, curr) =>
-      parseFloat(curr.cgpa || 0) > parseFloat(max.cgpa || 0) ? curr : max
-    );
-
-    res.json({
-      totalStudents,
-      avgSgpa: avgSgpa.toFixed(2),
-      avgCgpa: avgCgpa.toFixed(2),
-      topper: {
-        regNo: topper.regNo,
-        name: topper.name,
-        cgpa: topper.cgpa,
-        sgpa: topper.sgpa,
-      },
-    });
-  } catch (err) {
-    console.error("Analytics error:", err);
-    res.status(500).json({ error: "Failed to calculate analytics" });
   }
 });
 
