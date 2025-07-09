@@ -77,6 +77,6 @@ async function searchResult() {
     }
   } catch (err) {
     resultDiv.innerHTML = `<p style="color: red;">Failed to fetch result. Server may be down.</p>`;
-    console.error(err);
+  
   }
 }
