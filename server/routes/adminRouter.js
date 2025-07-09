@@ -6,6 +6,7 @@ const path = require("path");
 router.get("/logs", (req, res) => {
   const logPath = path.join(__dirname, "..", "user-logs.txt");
 
+  
   fs.readFile(logPath, "utf-8", (err, data) => {
     if (err) {
       console.error("Error reading logs:", err);
