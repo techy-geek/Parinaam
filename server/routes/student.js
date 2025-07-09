@@ -3,9 +3,7 @@ const router = express.Router();
 const Student = require("../models/Student");
 const fs = require("fs");
 const path = require("path");
-
-const logFilePath = path.join(process.cwd(), "user-logs.txt"); // Always points to project root
-
+const logFilePath = path.join(process.cwd(), "user-logs.txt"); 
 router.get("/:regNo", async (req, res) => {
   const regNo = req.params.regNo.trim();
 
