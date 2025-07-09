@@ -6,7 +6,7 @@ let serial = 1;
 router.get("/:regNo", async (req, res) => {
   const regNo = req.params.regNo.trim();
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-  const timestamp = new Date();
+  const timestamp = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
 
   try {
     const student = await Student.findOne({ regNo });

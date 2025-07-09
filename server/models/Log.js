@@ -4,10 +4,9 @@ const logSchema = new mongoose.Schema({
   serial: Number,
   regNo: String,
   ip: String,
-  timestamp: {
-    type: Date,
-    default: Date.now
-  }
+timestamp: {
+  type: String,
+}
 });
 
 module.exports = mongoose.model("Log", logSchema);
